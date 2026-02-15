@@ -1,0 +1,73 @@
+import {
+    Model,
+    InferAttributes,
+    InferCreationAttributes,
+    CreationOptional,
+    DataTypes,
+    ForeignKey,
+} from "sequelize";
+import sequelize from "../config/db/connect";
+import User from "./user.model";
+
+/**
+ * 
+ * import { Model, InferAttributes, InferCreationAttributes, CreationOptional } from 'sequelize';
+// https://sequelize.org/docs/v6/other-topics/typescript/
+// order of InferAttributes & InferCreationAttributes is important.
+class User extends Model<InferAttributes<User>, InferCreationAttributes<User>> {
+  // 'CreationOptional' is a special type that marks the field as optional
+  // when creating an instance of the model (such as using Model.create()).
+  declare id: CreationOptional<number>;
+  declare name: string;
+  // other attributes...
+}
+  https://sequelize.org/docs/v6/other-topics/typescript/#the-case-of-modelinit
+ * 
+ */
+
+class Item extends Model<InferAttributes<Item>, InferCreationAttributes<Item>> {
+    declare id: CreationOptional<string>;
+    // declare userId: ForeignKey<number>;
+    declare name: string;
+    declare quantity: number;
+    declare createdAt: CreationOptional<string>;
+    // declare updatedAt: CreationOptional<string>;
+}
+
+// this configures the `userId` attribute
+// Item.belongsTo(User)
+
+Item.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            autoIncrement: true,
+            primaryKey: true,
+        },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        quantity: {
+            type: DataTypes.INTEGER,
+            defaultValue: 1,
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            field: "createdat",
+        },
+        // updatedAt: {
+        //     type: DataTypes.DATE,
+        // },
+    },
+    {
+        sequelize,
+        tableName: "item",
+        modelName: "Item",
+        timestamps: true,
+        createdAt: "createdat",
+        updatedAt: false,
+    },
+);
+
+export default Item;
