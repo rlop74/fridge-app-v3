@@ -65,7 +65,7 @@ Item.init(
         tableName: "item",
         modelName: "Item",
         timestamps: true,
-        createdAt: "createdat",
+        // createdAt: "createdat",
         updatedAt: false,
     },
 );

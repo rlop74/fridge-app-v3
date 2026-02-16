@@ -11,7 +11,7 @@ class BaseController<T extends Model> {
     getAll = async (req: Request, res: Response) => {
         try {
             const items = await this.model.findAll();
-            console.log(items);
+            // console.log(items);
             res.status(200).json({ items: items });
         } catch (err) {
             res.status(500).json({
@@ -19,7 +19,7 @@ class BaseController<T extends Model> {
                 error: err,
             });
         }
-    }
+    };
 
     async list(req: Request, res: Response) {
         const rows = await this.model.findAll();
@@ -33,8 +33,8 @@ class BaseController<T extends Model> {
 
     create = async (req: Request, res: Response) => {
         try {
-            console.log("this.model =", this.model); // ✅ works
-            console.log(req.body);
+            // console.log("this.model =", this.model); // ✅ works
+            // console.log(req.body);
             const row = await this.model.create(req.body);
             res.status(201).json({ msg: "new row inserted", data: row });
         } catch (err: any) {
