@@ -31,6 +31,8 @@ class Item extends Model<InferAttributes<Item>, InferCreationAttributes<Item>> {
     declare name: string;
     declare quantity: number;
     declare createdAt: CreationOptional<string>;
+    declare consumed: boolean;
+    declare thrown: boolean;
     // declare updatedAt: CreationOptional<string>;
 }
 
@@ -59,6 +61,14 @@ Item.init(
         // updatedAt: {
         //     type: DataTypes.DATE,
         // },
+        consumed: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+        },
+        thrown: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false,
+        }
     },
     {
         sequelize,
